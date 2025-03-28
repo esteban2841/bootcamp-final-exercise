@@ -21,7 +21,7 @@
         "type": "OData",
         "settings": {
           "annotations": [],
-          "localUri": "localService/mainService/metadata.xml",
+          "localUri": "localService/metadata.xml",
           "odataVersion": "2.0"
         }
       }
@@ -44,7 +44,7 @@
     }
   },
   "sap.ui5": {
-    "flexEnabled": true,
+    "flexEnabled": false,
     "dependencies": {
       "minUI5Version": "1.134.1",
       "libs": {
