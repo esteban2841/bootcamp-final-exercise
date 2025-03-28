@@ -5,8 +5,12 @@
 >
     <Page id="page" title="{i18n>title}">
         <VBox 
-            
+            class="sapUiLargePadding"
         >
+            <c:Fragment
+                type="XML"
+                fragmentName="com.bootcamp.sapui5.finaltest.view.fragments.FilterHeader"
+            ></c:Fragment>
             <c:Fragment
                 type="XML"
                 fragmentName="com.bootcamp.sapui5.finaltest.view.fragments.SuppliersTable"
@@ -14,3 +18,4 @@
         </VBox>
     </Page>
 </mvc:View>
+

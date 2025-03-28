@@ -86,7 +86,10 @@
         "viewType": "XML",
         "path": "com.bootcamp.sapui5.finaltest.view",
         "async": true,
-        "viewPath": "com.bootcamp.sapui5.finaltest.view"
+        "viewPath": "com.bootcamp.sapui5.finaltest.view",
+        "files": [
+					"fragments.SortDialog.fragment.xml"
+				]
       },
       "routes": [
         {

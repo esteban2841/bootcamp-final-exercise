@@ -1,0 +1,58 @@
+<c:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+>
+    <FlexBox id="idSearchContainer"
+        backgroundDesign="Solid"
+        gap="15px"
+        direction="Row"
+        alignItems="Center"
+        justifyContent="Center"
+        width="100%" 
+        class="sapUiLargePaddingTop sapUiLargePaddingBottom"
+    >
+        <FlexBox
+            gap="10px"
+            direction="Column"
+            alignItems="Center"
+            justifyContent="SpaceBetween"
+        >
+            <Label text="Nombre"/>
+            <Input id="idSearchInput"
+                placeholder="{i18n>placeholderSearchInput}"
+                value="{SuppliersDataStore>/valueInputSearch}">
+
+            </Input>
+        </FlexBox>
+        <!-- <l:VerticalLayout
+            width="100%">
+            <Label text="Proveedores"/>
+            <MultiComboBox
+                selectedKeys="{SuppliersDataStore>/selectedSuppliers}"
+                maxWidth="650px"
+                items="{
+                    path: '/Suppliers',
+                    sorter: { path: 'SupplierID' }
+                }">
+                <c:Item key="{SupplierID}" text="{SupplierID}" />
+            </MultiComboBox>
+        </l:VerticalLayout> -->
+        <!-- <l:VerticalLayout
+            width="100%">
+            <Label text="Proveedores (multi input)"/>
+            <MultiInput width="70%"
+                showClearIcon="true"
+                id="multiInput"
+                suggestionItems="{
+                    path: '/Suppliers',
+                    sorter: { path: 'CompanyName' }
+                }"
+                suggestionItemSelected=".onSupplierSelected"
+                showValueHelp="false">
+                <c:Item key="{SupplierID}" text="{CompanyName}" />
+            </MultiInput>
+        </l:VerticalLayout>     -->
+            <Button id="idSearchButton" text="{i18n>buttonSearchText}" press=".onFetchProducts" width="auto" />
+    </FlexBox>
+</c:FragmentDefinition>

@@ -2,11 +2,28 @@
     xmlns="sap.m"
     xmlns:c="sap.ui.core"
 >
-        <Table id="idProductsTable" items="{
-            path: 'SuppliersDataStore>/suppliers'
-        }">
+        <Table id="suppliersTable"
+            class="suppliersTable"
+            headerText="{i18n>Suppliers Table}"
+            items="{
+                path: 'SuppliersDataStore>/suppliers'
+            }"
+        >
+            <headerToolbar>
+				<OverflowToolbar>
+					<Title text="Products" level="H2"/>
+					<ToolbarSpacer/>
+					<Button
+						tooltip="Sort"
+						icon="sap-icon://sort"
+						press="handleSortButtonPressed"/>
+					<ToggleButton icon="sap-icon://menu" tooltip="Enable Custom Context Menu" press="onToggleContextMenu" />
+				</OverflowToolbar>
+			</headerToolbar>
             <columns>
-                <Column  header="{i18n>supplierId}">
+                <Column  
+                    header="{i18n>supplierId}"
+                >
                     <Text text="{i18n>supplierId}"></Text>
                 </Column>
                 <Column  header="{i18n>companyName}">

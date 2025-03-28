@@ -14,6 +14,7 @@ sap.ui.define([
             const suppliers = await HomeService.read_oData_entity(this._oNorthwindModel, oFilters, '/Suppliers')
             oComponent.setModel(new JSONModel({
                 suppliers: suppliers[0].results,
+                valueInputSearch: "",
             }), "SuppliersDataStore")
 
             const data = oComponent.getModel('SuppliersDataStore').getData()
