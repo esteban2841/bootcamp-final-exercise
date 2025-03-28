@@ -12,6 +12,7 @@ sap.ui.define([
             const store = this.getOwnerComponent().getModel()
             console.log(store, 'store default')
             this._mViewSettingsDialogs = {};
+			this.oRouter = this.getOwnerComponent().getRouter()
         },
 
 		getViewSettingsDialog: function (sDialogFragmentName) {
@@ -58,5 +59,15 @@ sap.ui.define([
 					oViewSettingsDialog.open();
             });
 		},
+
+		onItemPressRedirect: function(oEvent){
+            let oSource = oEvent.getSource();
+            console.log(oSource, 'sourcer')
+            let oDatos = oSource.getBindingContext("SuppliersDataStore").getObject();
+            console.log(oDatos, 'datica')
+            this.oRouter.navTo("detail", {
+                SupplierID: oDatos.SupplierID
+            });
+        },
     });
 });

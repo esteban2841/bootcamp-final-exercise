@@ -9,6 +9,7 @@
 			<ViewSettingsItem text="Company Name" key="CompanyName" selected="true" />
 			<ViewSettingsItem text="Contact Name" key="ContactName" />
 			<ViewSettingsItem text="Contact Title" key="ContactTitle" />
+			<ViewSettingsItem text="Address" key="Address" />
 			<ViewSettingsItem text="City" key="City" />
 		</sortItems>
 	</ViewSettingsDialog>

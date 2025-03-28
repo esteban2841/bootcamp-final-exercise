@@ -10,7 +10,7 @@
         alignItems="Center"
         justifyContent="Center"
         width="100%" 
-        class="sapUiLargePaddingTop sapUiLargePaddingBottom"
+        class="sapUiResponsiveContentPadding"
     >
         <FlexBox
             gap="10px"

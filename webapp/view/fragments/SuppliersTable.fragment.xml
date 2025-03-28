@@ -17,7 +17,6 @@
 						tooltip="Sort"
 						icon="sap-icon://sort"
 						press="handleSortButtonPressed"/>
-					<ToggleButton icon="sap-icon://menu" tooltip="Enable Custom Context Menu" press="onToggleContextMenu" />
 				</OverflowToolbar>
 			</headerToolbar>
             <columns>

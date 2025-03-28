@@ -1,0 +1,58 @@
+<mvc:View controllerName="com.bootcamp.sapui5.finaltest.controller.Detail"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+    xmlns:smartTable="sap.ui.comp.smarttable">
+    <Page id="pageDetail" title="{i18n>titleDetail}">
+    <VBox id="dhb_01">
+		<f:SimpleForm id="SimpleFormDisplay354"
+			editable="false"
+			layout="ResponsiveGridLayout"
+			title="{i18n>Information}"
+			labelSpanXL="3" labelSpanL="3"
+			labelSpanM="3" labelSpanS="12"
+			adjustLabelSpan="false" emptySpanXL="4"
+			emptySpanL="4" emptySpanM="4" emptySpanS="0"
+            columnsXL="1" columnsL="1" columnsM="1"
+			singleContainerFullSize="false" >
+			<f:content>
+				<Label id="ld_01" text="{i18n>supplierId}" />
+				<Text id="nameText" text="{SupplierID}" />
+
+				<Label id="ld_02" text="{i18n>companyName}" />
+				<Text id="td_01" text="{Street} {CompanyName}" />
+
+				<Label id="ld_03" text="{i18n>contactName}" />
+				<Text id="td_02" text="{ContactName}" />
+
+				<Label id="ld_04" text="{i18n>contactTitle}" />
+				<Text id="countryText" text="{ContactTitle}" />
+
+				<Label text="{i18n>city}" />
+				<Text text="{City}" />
+			</f:content>
+		</f:SimpleForm>
+
+        <smartTable:SmartTable
+            id="ST_SUPPLIER_PRODUCTS"
+            entitySet="Products"
+            tableBindingPath="Products"
+            initiallyVisibleFields="ProductID,ProductName,UnitPrice,QuantityPerUnit,Supplier, UnitsInStock, Discontinued"
+            tableType="ResponsiveTable"
+            enableExport="true"
+            useVariantManagement="false"
+            useTablePersonalisation="true"
+            header="{i18n>headerSupplierProducts}"
+            showRowCount="true"
+            showFullScreenButton="true"
+            enableAutoBinding="true"
+            class="sapUiResponsiveContentPadding"
+            enableAutoColumnWidth="true"
+            editTogglable="false" >
+            <smartTable:customToolbar>
+            </smartTable:customToolbar>
+        </smartTable:SmartTable>
+    </VBox>
+    </Page>
+</mvc:View>
