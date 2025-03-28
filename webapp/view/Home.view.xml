@@ -1,6 +1,16 @@
 <mvc:View controllerName="com.bootcamp.sapui5.finaltest.controller.Home"
     xmlns:mvc="sap.ui.core.mvc"
-    xmlns="sap.m">
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+>
     <Page id="page" title="{i18n>title}">
+        <VBox 
+            
+        >
+            <c:Fragment
+                type="XML"
+                fragmentName="com.bootcamp.sapui5.finaltest.view.fragments.SuppliersTable"
+            ></c:Fragment>
+        </VBox>
     </Page>
 </mvc:View>

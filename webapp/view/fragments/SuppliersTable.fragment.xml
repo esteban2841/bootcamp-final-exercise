@@ -1,0 +1,40 @@
+<c:FragmentDefinition 
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+>
+        <Table id="idProductsTable" items="{
+            path: 'SuppliersDataStore>/suppliers'
+        }">
+            <columns>
+                <Column  header="{i18n>supplierId}">
+                    <Text text="{i18n>supplierId}"></Text>
+                </Column>
+                <Column  header="{i18n>companyName}">
+                    <Text text="{i18n>companyName}"></Text>
+                </Column>
+                <Column  header="{i18n>contactName}">
+                    <Text text="{i18n>contactName}"></Text>
+                </Column>
+                <Column  header="{i18n>contactTitle}">
+                    <Text text="{i18n>contactTitle}"></Text>
+                </Column>
+                <Column  header="{i18n>address}">
+                    <Text text="{i18n>address}"></Text>
+                </Column>
+                <Column  header="{i18n>city}">
+                    <Text text="{i18n>city}"></Text>
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem type="Active" press="onItemPressRedirect">
+                    <Text text="{SuppliersDataStore>SupplierID}"/>
+                    <Text text="{SuppliersDataStore>CompanyName}"/>
+                    <Text text="{SuppliersDataStore>ContactName}"/>
+                    <Text text="{SuppliersDataStore>ContactTitle}"/>
+                    <Text text="{SuppliersDataStore>Address}"/>
+                    <Text text="{SuppliersDataStore>City}"/>
+                </ColumnListItem>
+            </items>
+        </Table>
+
+</c:FragmentDefinition >
