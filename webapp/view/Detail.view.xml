@@ -44,7 +44,7 @@
             id="ST_SUPPLIER_PRODUCTS"
             entitySet="Products"
             tableBindingPath="Products"
-            initiallyVisibleFields="ProductID,ProductName,UnitPrice,QuantityPerUnit,Supplier, UnitsInStock, Discontinued"
+            initiallyVisibleFields="ProductID,ProductName,UnitPrice,QuantityPerUnit"
             tableType="ResponsiveTable"
             enableExport="true"
             useVariantManagement="false"
@@ -55,9 +55,12 @@
             enableAutoBinding="true"
             class="sapUiResponsiveContentPadding"
             enableAutoColumnWidth="true"
-            editTogglable="false" >
+            editTogglable="false"
+            persistencyKey="SmartTableAnalytical_Explored"
+        >
             <smartTable:customToolbar>
             </smartTable:customToolbar>
+            
         </smartTable:SmartTable>
     </VBox>
     </Page>
