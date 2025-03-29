@@ -4,10 +4,16 @@
 	xmlns:f="sap.ui.layout.form"
 	xmlns:core="sap.ui.core"
     xmlns:smartTable="sap.ui.comp.smarttable">
-    <Page id="pageDetail" title="{i18n>titleDetail}">
+    <Page  
+        id="pageDetail" 
+        title="{i18n>titleDetail}"
+        showNavButton="true"
+		navButtonPress=".onNavBack"
+		class="sapUiResponsiveContentPadding"
+    >
     <VBox id="dhb_01">
 		<f:SimpleForm id="SimpleFormDisplay354"
-			editable="false"
+			editable="true"
 			layout="ResponsiveGridLayout"
 			title="{i18n>Information}"
 			labelSpanXL="3" labelSpanL="3"

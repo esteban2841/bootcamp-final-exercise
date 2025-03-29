@@ -1,11 +1,11 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller",
+    "com/bootcamp/sapui5/finaltest/controller/BaseController",
     "com/bootcamp/sapui5/finaltest/utils/HomeHelper",
     "com/bootcamp/sapui5/finaltest/utils/HomeService",
-], (Controller, HomeHelper, HomeService) => {
+], (BaseController, HomeHelper, HomeService) => {
     "use strict";
 
-    return Controller.extend("com.bootcamp.sapui5.finaltest.controller.Detail", {
+    return BaseController.extend("com.bootcamp.sapui5.finaltest.controller.Detail", {
         onInit: function () {
             console.log('entro en detail')
             let oRouter = sap.ui.core.UIComponent.getRouterFor(this);

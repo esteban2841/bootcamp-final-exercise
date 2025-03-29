@@ -1,5 +1,5 @@
 sap.ui.define([
-  "sap/ui/core/mvc/Controller"
+  "com/bootcamp/sapui5/finaltest/controller/BaseController",
 ], (BaseController) => {
   "use strict";
 

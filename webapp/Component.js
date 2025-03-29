@@ -17,6 +17,8 @@ sap.ui.define([
             // call the base component's init function
             UIComponent.prototype.init.apply(this, arguments);
 
+            sap.ui.getCore().applyTheme("sap_fiori_3_dark");
+
             // set the device model
             this.setModel(models.createDeviceModel(), "device");
 
