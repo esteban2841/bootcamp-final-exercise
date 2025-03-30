@@ -1,8 +1,12 @@
 sap.ui.define([
     "com/bootcamp/sapui5/finaltest/controller/BaseController",
+    'sap/ui/core/Fragment',
+    'sap/ui/Device',
+    "sap/ui/model/json/JSONModel",
     "com/bootcamp/sapui5/finaltest/utils/HomeHelper",
-    "com/bootcamp/sapui5/finaltest/utils/HomeService",
-], (BaseController, HomeHelper, HomeService) => {
+    "sap/ui/model/FilterOperator",
+    "sap/ui/model/Filter"
+], (BaseController, Fragment, Device, JSONModel, HomeHelper, FilterOperator, Filter) => {
     "use strict";
 
     return BaseController.extend("com.bootcamp.sapui5.finaltest.controller.Detail", {
@@ -10,35 +14,91 @@ sap.ui.define([
             console.log('entro en detail')
             let oRouter = sap.ui.core.UIComponent.getRouterFor(this);
             oRouter.getRoute("detail").attachPatternMatched(this._onObjectMatched, this);
+            this._mViewSettingsDialogs = {};
+            
+        },
 
-            //Logic to get the smart table when created and mounted in ui to inject html buttons to the rows 
+        onShowDetails: function(oEvent) {
+            let oBindingContext = oEvent.getSource().getBindingContext();
+            let oSelectedItem = oBindingContext.getObject();
+            console.log(oSelectedItem, 'selection')
+            // Your dialog opening logic here
+            this.showProductDetailDialog(oSelectedItem);
+        },
+
+        onCloseDialog (){
+            this.getVisualizationDialog("com.bootcamp.sapui5.finaltest.view.fragments.ProductDetailDialog")
+				.then(function (oViewSettingsDialog) {
+					oViewSettingsDialog.close();
+            });
+        },
+
+		getVisualizationDialog: function (sDialogFragmentName, itemSelected) {
+
+            let pDialog = this._mViewSettingsDialogs[sDialogFragmentName]
+            
+			if (!pDialog) {
+                pDialog = Fragment.load({
+                    id: this.getView().getId(),
+					name: sDialogFragmentName,
+					controller: this
+				}).then(function (oDialog) {
+                    oDialog.setModel(new JSONModel({
+                        ...itemSelected
+                    }), "ProductSelected")
+					if (Device.system.desktop) {
+                        oDialog.addStyleClass("sapUiSizeCompact");
+					}
+					return oDialog;
+				});
+				this._mViewSettingsDialogs[sDialogFragmentName] = pDialog;
+			}
+
+            pDialog.then(function (oDialog) {
+                //overwriting the Dialog product detail model inside the dialog View in order to change the product detail ref
+                oDialog.setModel(new JSONModel({
+                    ...itemSelected
+                }), "ProductSelected")
+                if (Device.system.desktop) {
+                    oDialog.addStyleClass("sapUiSizeCompact");
+                }
+                return oDialog;
+            });
+
+			return pDialog;
+		},
+
+        showProductDetailDialog: function (oSelectedItem) {
+			this.getVisualizationDialog("com.bootcamp.sapui5.finaltest.view.fragments.ProductDetailDialog", oSelectedItem)
+				.then(function (oViewSettingsDialog) {
+					oViewSettingsDialog.open();
+            });
+		},
+
+        createSupplierProduct(){
+            let oFilter = []
+            const models = this.getOwnerComponent().getModel("SuppliersDataStore").getData()
+            let supplierId = this.getView().byId("ST_SUPPLIER_PRODUCTS").getBindingContext().getObject()
+            
+            oFilter.push(new Filter("SupplierID", FilterOperator.EQ, supplierId.SupplierID));
+            this.filterSupplier(oFilter)
+
+            console.log( supplierId, models, 'sm table')
         },
         
-        onShowDetails: function(oEvent) {
-            var oBindingContext = oEvent.getSource().getBindingContext();
-            var oSelectedItem = oBindingContext.getObject();
+        filterSupplier: async function (oFilter, data){
             
-            // Your dialog opening logic here
-            this.showDetailDialog(oSelectedItem);
-        },
+            const oData = await HomeHelper.getDataProducts(oFilter)
 
-        showDetailDialog: function(oSelectedItem) {
-            if (!this._oDialog) {
-                this._oDialog = sap.ui.xmlfragment(
-                    "your.namespace.fragments.DetailDialog",
-                    this
-                );
-                this.getView().addDependent(this._oDialog);
-            }
-            
-            // Bind the selected item to the dialog
-            this._oDialog.bindElement({
-                path: "/" + oSelectedItem.__metadata.path,
-                model: "yourModelName"
-            });
-            
-            this._oDialog.open();
+            console.log(oData, 'filtro de supplier')
         },
+        
+        showCreateProductDialog: function () {
+			this.getVisualizationDialog("com.bootcamp.sapui5.finaltest.view.fragments.CreateProductDialog")
+				.then(function (oViewSettingsDialog) {
+					oViewSettingsDialog.open();
+            });
+		},
         
    
         _onObjectMatched: function (oEvent) {

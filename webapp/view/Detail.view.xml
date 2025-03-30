@@ -59,8 +59,42 @@
             persistencyKey="SmartTableAnalytical_Explored"
         >
             <smartTable:customToolbar>
+                <Toolbar >
+                    <FlexBox alignItems="Center" gap="10px" justifyContent="End" width="100%">
+                        <Text
+                            text="Add a new Product"
+                        /> 
+                        <Button
+                            icon="sap-icon://create-form"
+                            press="showCreateProductDialog"
+                        /> 
+                    </FlexBox>
+                </Toolbar >           
             </smartTable:customToolbar>
-            
+            <Table>
+                <columns>
+                    <Column  hAlign="Begin" width="100px">
+                        <Text text="{i18n>productDetails}" />
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <FlexBox 
+                                width="100%"
+                                alignContent="Center"
+                                justifyContent="Center"
+                            >
+                            
+                                <Button
+                                    icon="sap-icon://display"
+                                    press="onShowDetails"
+                                />
+                            </FlexBox>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+		</Table>
         </smartTable:SmartTable>
     </VBox>
     </Page>

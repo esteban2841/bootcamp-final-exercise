@@ -3,7 +3,10 @@ sap.ui.define([
 	'sap/ui/Device',
 	'sap/ui/model/Sorter',
 	"com/bootcamp/sapui5/finaltest/controller/BaseController",
-], (Fragment, Device, Sorter, BaseController) => {
+	"com/bootcamp/sapui5/finaltest/utils/HomeHelper",
+	'sap/ui/model/FilterOperator',
+	'sap/ui/model/Filter',
+], (Fragment, Device, Sorter, BaseController, HomeHelper, FilterOperator, Filter) => {
     "use strict";
 
     return BaseController.extend("com.bootcamp.sapui5.finaltest.controller.Home", {
@@ -13,6 +16,36 @@ sap.ui.define([
             console.log(store, 'store default')
             this._mViewSettingsDialogs = {};
 			this.oRouter = this.getOwnerComponent().getRouter()
+        },
+
+		onPress: async function (){
+            
+            let oFilter = [];
+            // let sValue = this.byId("inputID").getValue();
+            // let sValueCombo = this.byId("comboboxID").getSelectedKey();
+
+            let values = this.getOwnerComponent().getModel("SuppliersDataStore").getData()
+			
+			let isNumber = Number(values.valueInputSearch)
+
+            if (values.valueInputSearch && !Number.isNaN(isNumber)) {
+				console.log(isNumber, 'entra a EQ')
+                oFilter.push(new Filter("SupplierID", FilterOperator.EQ, values.valueInputSearch));
+            }
+			
+			if(values.valueInputSearch && Number.isNaN(isNumber)){
+				console.log(isNumber, 'entra a Contains')
+				oFilter.push(new Filter("CompanyName", FilterOperator.Contains, values.valueInputSearch));
+
+			}
+            console.log( oFilter, 'filter params')
+            let oDatos = await HomeHelper.getDataProducts(oFilter);
+            
+            let CurrentState = this.getOwnerComponent().getModel('SuppliersDataStore').getData()
+            
+            CurrentState.suppliers = oDatos[0].results
+            
+            await HomeHelper.setProductModel(this, CurrentState, "SuppliersDataStore");
         },
 
 		getViewSettingsDialog: function (sDialogFragmentName) {

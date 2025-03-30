@@ -15,12 +15,24 @@ sap.ui.define([
             oComponent.setModel(new JSONModel({
                 suppliers: suppliers[0].results,
                 valueInputSearch: "",
+                supplierForm: {
+                    ProductName: "",
+                    ProductID: "",
+                    UnitPrice: 0,
+                    
+                },
             }), "SuppliersDataStore")
 
             const data = oComponent.getModel('SuppliersDataStore').getData()
             console.log(data, 'se setea bien la data')
             return data
             
+        },
+
+        getDataProducts: async function (oFilters){
+            console.log(oFilters, 'filtros in fn')
+            // let oFilters = [];
+            return await HomeService.read_oData_entity(this._oNorthwindModel, oFilters)
         },
 
         setProductModel: async function (oController, oDatos, ModelName) {

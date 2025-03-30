@@ -18,41 +18,13 @@
             alignItems="Center"
             justifyContent="SpaceBetween"
         >
-            <Label text="Nombre"/>
+            <Label text="{i18n>placeholderSearchInput}"/>
             <Input id="idSearchInput"
                 placeholder="{i18n>placeholderSearchInput}"
                 value="{SuppliersDataStore>/valueInputSearch}">
 
             </Input>
         </FlexBox>
-        <!-- <l:VerticalLayout
-            width="100%">
-            <Label text="Proveedores"/>
-            <MultiComboBox
-                selectedKeys="{SuppliersDataStore>/selectedSuppliers}"
-                maxWidth="650px"
-                items="{
-                    path: '/Suppliers',
-                    sorter: { path: 'SupplierID' }
-                }">
-                <c:Item key="{SupplierID}" text="{SupplierID}" />
-            </MultiComboBox>
-        </l:VerticalLayout> -->
-        <!-- <l:VerticalLayout
-            width="100%">
-            <Label text="Proveedores (multi input)"/>
-            <MultiInput width="70%"
-                showClearIcon="true"
-                id="multiInput"
-                suggestionItems="{
-                    path: '/Suppliers',
-                    sorter: { path: 'CompanyName' }
-                }"
-                suggestionItemSelected=".onSupplierSelected"
-                showValueHelp="false">
-                <c:Item key="{SupplierID}" text="{CompanyName}" />
-            </MultiInput>
-        </l:VerticalLayout>     -->
-            <Button id="idSearchButton" text="{i18n>buttonSearchText}" press=".onFetchProducts" width="auto" />
+            <Button id="idSearchButton" text="{i18n>buttonSearchText}" press=".onPress" width="auto" />
     </FlexBox>
 </c:FragmentDefinition>

@@ -1,0 +1,31 @@
+<c:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:c="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+>
+     <Dialog id="create-product-dialog" title="Create a product">
+        <content>
+            <f:SimpleForm editable="true" layout="ResponsiveGridLayout">
+                <f:content>
+                    <Label text="Product ID"/>
+                    <Input />
+                    
+                    <Label text="Name"/>
+                    <Input />
+                    
+                    <Label text="Category"/>
+                    <Input />
+                    
+                    <Label text="Price"/>
+                    <Input />
+                    
+                </f:content>
+            </f:SimpleForm>
+        </content>
+        <buttons>
+            <Button text="Create" press="createSupplierProduct"/>
+        </buttons>
+    </Dialog>
+    
+</c:FragmentDefinition>
