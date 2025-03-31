@@ -77,13 +77,15 @@ sap.ui.define([
 
         createSupplierProduct(){
             let oFilter = []
-            const models = this.getOwnerComponent().getModel("SuppliersDataStore").getData()
             let supplierId = this.getView().byId("ST_SUPPLIER_PRODUCTS").getBindingContext().getObject()
+            const models = this.getOwnerComponent().getModel("SuppliersDataStore").getData()
             
             oFilter.push(new Filter("SupplierID", FilterOperator.EQ, supplierId.SupplierID));
             this.filterSupplier(oFilter)
 
-            console.log( supplierId, models, 'sm table')
+            const productSupplier = supplierId.Products._list
+
+            console.log( productSupplier, supplierId, 'sm table')
         },
         
         filterSupplier: async function (oFilter, data){

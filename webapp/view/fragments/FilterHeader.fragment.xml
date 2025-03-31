@@ -14,16 +14,28 @@
     >
         <FlexBox
             gap="10px"
-            direction="Column"
+            direction="Row"
             alignItems="Center"
             justifyContent="SpaceBetween"
         >
-            <Label text="{i18n>placeholderSearchInput}"/>
-            <Input id="idSearchInput"
-                placeholder="{i18n>placeholderSearchInput}"
-                value="{SuppliersDataStore>/valueInputSearch}">
+            <l:VerticalLayout >
+            
+                <Label text="{i18n>placeholderSearchInput}"/>
+                <Input id="idSearchByIdInput"
+                    placeholder="{i18n>placeholderSearchInput}"
+                    value="{SuppliersDataStore>/valueInputByIdSearch}">
 
-            </Input>
+                </Input>
+            </l:VerticalLayout>
+            <l:VerticalLayout >
+            
+                <Label text="{i18n>placeholderSearchInput}"/>
+                <Input id="idSearchByNameInput"
+                    placeholder="{i18n>placeholderSearchInput}"
+                    value="{SuppliersDataStore>/valueInputByNameSearch}">
+
+                </Input>
+            </l:VerticalLayout>
         </FlexBox>
             <Button id="idSearchButton" text="{i18n>buttonSearchText}" press=".onPress" width="auto" />
     </FlexBox>

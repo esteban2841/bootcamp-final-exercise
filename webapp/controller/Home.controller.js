@@ -26,16 +26,14 @@ sap.ui.define([
 
             let values = this.getOwnerComponent().getModel("SuppliersDataStore").getData()
 			
-			let isNumber = Number(values.valueInputSearch)
-
-            if (values.valueInputSearch && !Number.isNaN(isNumber)) {
-				console.log(isNumber, 'entra a EQ')
-                oFilter.push(new Filter("SupplierID", FilterOperator.EQ, values.valueInputSearch));
+            if (values.valueInputByIdSearch) {
+				console.log(values.valueInputByIdSearch, 'entra a EQ')
+                oFilter.push(new Filter("SupplierID", FilterOperator.EQ, values.valueInputByIdSearch));
             }
 			
-			if(values.valueInputSearch && Number.isNaN(isNumber)){
-				console.log(isNumber, 'entra a Contains')
-				oFilter.push(new Filter("CompanyName", FilterOperator.Contains, values.valueInputSearch));
+			if(values.valueInputByNameSearch){
+				console.log(values.valueInputByNameSearch, 'entra a Contains')
+				oFilter.push(new Filter("CompanyName", FilterOperator.Contains, values.valueInputByNameSearch));
 
 			}
             console.log( oFilter, 'filter params')
