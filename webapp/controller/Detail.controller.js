@@ -176,9 +176,14 @@ sap.ui.define([
                         new sap.m.Text({ text: "{SuppliersDataStore>CategoryID}" }),
                         new sap.m.Button({
                             icon: "sap-icon://display",
-                            class: "{SuppliersDataStore>ProductID}",
                             press: function (oEvent) {
                                 this.onShowDetailsCreation(oEvent); // <-- Llamada explícita
+                            }.bind(this)
+                        }),
+                        new sap.m.Button({
+                            icon: "sap-icon://delete",
+                            press: function (oEvent) {
+                                this.delete(oEvent); // <-- Llamada explícita
                             }.bind(this)
                         })
                     ]
