@@ -11,7 +11,7 @@
         >
             <headerToolbar>
 				<OverflowToolbar>
-					<Title text="Products" level="H2"/>
+					<Title text="{i18n>tableHeaderTitle}" level="H2"/>
 					<ToolbarSpacer/>
 					<Button
 						tooltip="Sort"

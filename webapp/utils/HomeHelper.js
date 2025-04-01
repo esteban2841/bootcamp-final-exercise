@@ -13,33 +13,34 @@ sap.ui.define([
             const oFilters = []
             const suppliers = await HomeService.read_oData_entity(this._oNorthwindModel, oFilters, '/Suppliers')
             const products = await HomeService.read_oData_entity(this._oNorthwindModel, oFilters, '/Products')
+            const categories = await HomeService.read_oData_entity(this._oNorthwindModel, oFilters, '/Categories')
+
             oComponent.setModel(new JSONModel({
                 suppliers: suppliers[0].results,
                 products: products[0].results,
+                categories: categories[0].results,
                 filteredProductsByProvider: [],
                 valueInputByIdSearch: "",
                 valueInputByNameSearch: "",
                 newProductName: "",
                 newProductID: "",
                 newUnitPrice: 0,
+                multiFilter: [],
             }), "SuppliersDataStore")
 
             const data = oComponent.getModel('SuppliersDataStore').getData()
-            console.log(data, 'se setea bien la data')
             return data
             
         },
 
         filterSupplierProducts: async function (oFilters){
-            console.log(oFilters, 'filtering supplier products')
             const supplierProducts = await HomeService.read_oData_entity(this._oNorthwindModel, oFilters, '/Products')
             return supplierProducts
         },
 
-        getDataProducts: async function (oFilters){
-            console.log(oFilters, 'filtros in fn')
+        getDataProducts: async function (oFilters, entity = '/Supplier'){
             // let oFilters = [];
-            return await HomeService.read_oData_entity(this._oNorthwindModel, oFilters)
+            return await HomeService.read_oData_entity(this._oNorthwindModel, oFilters, entity)
         },
 
         setProductModel: async function (oController, oDatos, ModelName) {

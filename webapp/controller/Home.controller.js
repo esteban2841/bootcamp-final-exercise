@@ -13,7 +13,6 @@ sap.ui.define([
         onInit() {
             // const store = this.getOwnerComponent().getModel('ProductDataStore').getData()
             const store = this.getOwnerComponent().getModel()
-            console.log(store, 'store default')
             this._mViewSettingsDialogs = {};
 			this.oRouter = this.getOwnerComponent().getRouter()
         },
@@ -27,16 +26,13 @@ sap.ui.define([
             let values = this.getOwnerComponent().getModel("SuppliersDataStore").getData()
 			
             if (values.valueInputByIdSearch) {
-				console.log(values.valueInputByIdSearch, 'entra a EQ')
                 oFilter.push(new Filter("SupplierID", FilterOperator.EQ, values.valueInputByIdSearch));
             }
 			
 			if(values.valueInputByNameSearch){
-				console.log(values.valueInputByNameSearch, 'entra a Contains')
 				oFilter.push(new Filter("CompanyName", FilterOperator.Contains, values.valueInputByNameSearch));
 
 			}
-            console.log( oFilter, 'filter params')
             let oDatos = await HomeHelper.getDataProducts(oFilter);
             
             let CurrentState = this.getOwnerComponent().getModel('SuppliersDataStore').getData()
@@ -60,7 +56,6 @@ sap.ui.define([
         },
 
 		getViewSettingsDialog: function (sDialogFragmentName) {
-            console.log(sDialogFragmentName, 'dialog name', this.getView().getId(), this)
 			var pDialog = this._mViewSettingsDialogs[sDialogFragmentName];
 
 			if (!pDialog) {
@@ -69,7 +64,6 @@ sap.ui.define([
 					name: sDialogFragmentName,
 					controller: this
 				}).then(function (oDialog) {
-                    console.log(oDialog, 'dialog fragment container')
 					if (Device.system.desktop) {
 						oDialog.addStyleClass("sapUiSizeCompact");
 					}
@@ -106,9 +100,7 @@ sap.ui.define([
 
 		onItemPressRedirect: function(oEvent){
             let oSource = oEvent.getSource();
-            console.log(oSource, 'sourcer')
             let oDatos = oSource.getBindingContext("SuppliersDataStore").getObject();
-            console.log(oDatos, 'datica')
             this.oRouter.navTo("detail", {
                 SupplierID: oDatos.SupplierID
             });

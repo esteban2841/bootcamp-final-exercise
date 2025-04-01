@@ -14,10 +14,10 @@
                     <Label text="Name"/>
                     <Text text="{ProductSelected>/ProductName}"/>
                     
-                    <Label text="Category"/>
+                    <Label text="Unit Price"/>
                     <Text text="{ProductSelected>/UnitPrice}"/>
                     
-                    <Label text="Price"/>
+                    <Label text="Quantity per unit"/>
                     <Text text="{ProductSelected>/QuantityPerUnit}"/>
                     
                 </f:content>

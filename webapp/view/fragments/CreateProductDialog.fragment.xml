@@ -2,12 +2,40 @@
     xmlns="sap.m"
     xmlns:f="sap.ui.layout.form"
     xmlns:c="sap.ui.core"
+    xmlns:core="sap.ui.core"
     xmlns:l="sap.ui.layout"
 >
      <Dialog id="create-product-dialog" title="Create a product">
         <content>
             <f:SimpleForm editable="true" layout="ResponsiveGridLayout">
                 <f:content>
+
+                <!-- <MultiComboBox
+                id="MT_CATEGORIES_SELECT"
+                    selectionChange="onSelectionChange"
+                    selectionFinish="onFinishChange"
+                    selectedKeys="{ProductSelected>/multiFilter}"
+                    items="{
+                        path: 'ProductSelected>/categories',
+                        sorter: { path: 'CategoryName' }
+                    }">
+                    <core:Item key="{ProductSelected>CategoryID}" text="{ProductSelected>CategoryID} {ProductSelected>CategoryName}" />                                     
+                </MultiComboBox>   
+                            Category -->
+            <Label text="Category" required="true" />
+            <Select
+            id="CategoryId"
+                selectedKey="{ProductSelected>/newCategoryID}"
+                valueState="{= ${ProductSelected>/newCategoryID} ? 'None' : 'Error' }"
+                items="{
+                    path: 'ProductSelected>/categories'
+                }"
+                forceSelection="true"
+                change=".onSelectionChange"
+            >
+                <core:Item key="{ProductSelected>CategoryID}" text="{ProductSelected>CategoryName}" />
+            </Select>             
+
                     <Label text="Product ID"/>
                     <Input 
                         id="ProductId"

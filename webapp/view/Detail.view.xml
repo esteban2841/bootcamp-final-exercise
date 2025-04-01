@@ -63,17 +63,20 @@
                         </OverflowToolbar>
                     </headerToolbar>
                     <columns>
-                        <Column  hAlign="Begin" width="100px">
+                        <Column  hAlign="Center" width="100px">
                             <Text text="{i18n>productId}" />
                         </Column>
-                        <Column  hAlign="Begin" width="100px">
+                        <Column  hAlign="Center" width="100px">
                             <Text text="{i18n>productName}" />
                         </Column>
-                        <Column  hAlign="Begin" width="100px">
-                            <Text text="{i18n>productCategory}" />
+                        <Column  hAlign="Center" width="100px">
+                            <Text text="{i18n>productUnitPrice}" />
                         </Column>
-                        <Column  hAlign="Begin" width="100px">
-                            <Text text="{i18n>productDetails}" />
+                        <Column  hAlign="Center" width="100px">
+                            <Text text="{i18n>category}" />
+                        </Column>
+                        <Column  hAlign="Center" width="100px">
+                            <Text text="{i18n>moreInfo}" />
                         </Column>
                     </columns>
                     <items>
@@ -107,6 +110,16 @@
                                 
                                     <Text
                                         text="{SuppliersDataStore>UnitPrice}"
+                                    />
+                                </FlexBox>
+                                <FlexBox 
+                                    width="100%"
+                                    alignContent="Center"
+                                    justifyContent="Center"
+                                >
+                                
+                                    <Text
+                                        text="{SuppliersDataStore>CategoryID}"
                                     />
                                 </FlexBox>
                                 <FlexBox 
