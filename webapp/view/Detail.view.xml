@@ -1,4 +1,4 @@
-<mvc:View controllerName="com.bootcamp.sapui5.finaltest.controller.Detail"
+<mvc:View xmlns:layout="sap.ui.layout" controllerName="com.bootcamp.sapui5.finaltest.controller.Detail"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
 	xmlns:f="sap.ui.layout.form"
@@ -11,91 +11,120 @@
 		navButtonPress=".onNavBack"
 		class="sapUiResponsiveContentPadding"
     >
-    <VBox id="dhb_01">
-		<f:SimpleForm id="SimpleFormDisplay354"
-			editable="true"
-			layout="ResponsiveGridLayout"
-			title="{i18n>Information}"
-			labelSpanXL="3" labelSpanL="3"
-			labelSpanM="3" labelSpanS="12"
-			adjustLabelSpan="false" emptySpanXL="4"
-			emptySpanL="4" emptySpanM="4" emptySpanS="0"
-            columnsXL="1" columnsL="1" columnsM="1"
-			singleContainerFullSize="false" >
-			<f:content>
-				<Label id="ld_01" text="{i18n>supplierId}" />
-				<Text id="nameText" text="{SupplierID}" />
+        <VBox id="dhb_01">
+            <f:SimpleForm id="SimpleFormDisplay354"
+                editable="true"
+                layout="ResponsiveGridLayout"
+                title="{i18n>Information}"
+                labelSpanXL="3" labelSpanL="3"
+                labelSpanM="3" labelSpanS="12"
+                adjustLabelSpan="false" emptySpanXL="4"
+                emptySpanL="4" emptySpanM="4" emptySpanS="0"
+                columnsXL="1" columnsL="1" columnsM="1"
+                singleContainerFullSize="false" >
+                <f:content>
+                    <Label id="ld_01" text="{i18n>supplierId}" />
+                    <Text id="nameText" text="{SupplierID}" />
 
-				<Label id="ld_02" text="{i18n>companyName}" />
-				<Text id="td_01" text="{Street} {CompanyName}" />
+                    <Label id="ld_02" text="{i18n>companyName}" />
+                    <Text id="td_01" text="{Street} {CompanyName}" />
 
-				<Label id="ld_03" text="{i18n>contactName}" />
-				<Text id="td_02" text="{ContactName}" />
+                    <Label id="ld_03" text="{i18n>contactName}" />
+                    <Text id="td_02" text="{ContactName}" />
 
-				<Label id="ld_04" text="{i18n>contactTitle}" />
-				<Text id="countryText" text="{ContactTitle}" />
+                    <Label id="ld_04" text="{i18n>contactTitle}" />
+                    <Text id="countryText" text="{ContactTitle}" />
 
-				<Label text="{i18n>city}" />
-				<Text text="{City}" />
-			</f:content>
-		</f:SimpleForm>
-
-        <smartTable:SmartTable
-            id="ST_SUPPLIER_PRODUCTS"
-            entitySet="Products"
-            tableBindingPath="Products"
-            initiallyVisibleFields="ProductID,ProductName,UnitPrice,QuantityPerUnit"
-            tableType="ResponsiveTable"
-            enableExport="true"
-            useVariantManagement="false"
-            useTablePersonalisation="true"
-            header="{i18n>headerSupplierProducts}"
-            showRowCount="true"
-            showFullScreenButton="true"
-            enableAutoBinding="true"
-            class="sapUiResponsiveContentPadding"
-            enableAutoColumnWidth="true"
-            editTogglable="false"
-            persistencyKey="SmartTableAnalytical_Explored"
-        >
-            <smartTable:customToolbar>
-                <Toolbar >
-                    <FlexBox alignItems="Center" gap="10px" justifyContent="End" width="100%">
-                        <Text
-                            text="Add a new Product"
-                        /> 
-                        <Button
-                            icon="sap-icon://create-form"
-                            press="showCreateProductDialog"
-                        /> 
-                    </FlexBox>
-                </Toolbar >           
-            </smartTable:customToolbar>
-            <Table>
-                <columns>
-                    <Column  hAlign="Begin" width="100px">
-                        <Text text="{i18n>productDetails}" />
-                    </Column>
-                </columns>
-                <items>
-                    <ColumnListItem>
-                        <cells>
-                            <FlexBox 
-                                width="100%"
-                                alignContent="Center"
-                                justifyContent="Center"
-                            >
-                            
+                    <Label text="{i18n>city}" />
+                    <Text text="{City}" />
+                </f:content>
+            </f:SimpleForm>
+            <layout:VerticalLayout >          
+                <Table
+                    id="SUPPLIER_PRODUCTS_TABLE"
+                    headerText="{i18n>Products Table}"
+                    items="{
+                        path: 'SuppliersDataStore>/filteredProductsByProvider'
+                    }"
+                >
+                    <headerToolbar>
+                        <OverflowToolbar>
+                            <Title text="Products" level="H2"/>
+                            <ToolbarSpacer/>
+                            <FlexBox alignItems="Center" gap="10px" justifyContent="End" width="50%">
+                                <Text
+                                    text="Add a new Product"
+                                /> 
                                 <Button
-                                    icon="sap-icon://display"
-                                    press="onShowDetails"
-                                />
+                                    icon="sap-icon://create-form"
+                                    press="showCreateProductDialog"
+                                /> 
                             </FlexBox>
-                        </cells>
-                    </ColumnListItem>
-                </items>
-		</Table>
-        </smartTable:SmartTable>
-    </VBox>
+                        </OverflowToolbar>
+                    </headerToolbar>
+                    <columns>
+                        <Column  hAlign="Begin" width="100px">
+                            <Text text="{i18n>productId}" />
+                        </Column>
+                        <Column  hAlign="Begin" width="100px">
+                            <Text text="{i18n>productName}" />
+                        </Column>
+                        <Column  hAlign="Begin" width="100px">
+                            <Text text="{i18n>productCategory}" />
+                        </Column>
+                        <Column  hAlign="Begin" width="100px">
+                            <Text text="{i18n>productDetails}" />
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem type="Active">
+                            <cells>
+                                <FlexBox 
+                                    width="100%"
+                                    alignContent="Center"
+                                    justifyContent="Center"
+                                >
+                                
+                                    <Text
+                                        text="{SuppliersDataStore>ProductID}"
+                                    />
+                                </FlexBox>
+                                <FlexBox 
+                                    width="100%"
+                                    alignContent="Center"
+                                    justifyContent="Center"
+                                >
+                                
+                                    <Text
+                                        text="{SuppliersDataStore>ProductName}"
+                                    />
+                                </FlexBox>
+                                <FlexBox 
+                                    width="100%"
+                                    alignContent="Center"
+                                    justifyContent="Center"
+                                >
+                                
+                                    <Text
+                                        text="{SuppliersDataStore>UnitPrice}"
+                                    />
+                                </FlexBox>
+                                <FlexBox 
+                                    width="100%"
+                                    alignContent="Center"
+                                    justifyContent="Center"
+                                >
+                                
+                                    <Button
+                                        icon="sap-icon://display"
+                                        press="onShowDetailsCreation"
+                                    />
+                                </FlexBox>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </layout:VerticalLayout>
+        </VBox>
     </Page>
 </mvc:View>

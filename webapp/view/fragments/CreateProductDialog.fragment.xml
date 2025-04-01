@@ -9,22 +9,40 @@
             <f:SimpleForm editable="true" layout="ResponsiveGridLayout">
                 <f:content>
                     <Label text="Product ID"/>
-                    <Input />
+                    <Input 
+                        id="ProductId"
+                        placeholder="{i18n>placeholderSearchInput}"
+                        value="{ProductSelected>/newProductID}"
+                        required="true"
+                        valueState="{= ${ProductSelected>/newProductID} ? 'None' : 'Error' }"
+                        valueStateText="Product ID is required"
+                    />
                     
                     <Label text="Name"/>
-                    <Input />
-                    
-                    <Label text="Category"/>
-                    <Input />
-                    
+                    <Input 
+                        id="ProductName"
+                        placeholder="{i18n>placeholderSearchInput}"
+                        value="{ProductSelected>/newProductName}"
+                        required="true"
+                        valueState="{= ${ProductSelected>/newProductName} ? 'None' : 'Error' }"
+                        valueStateText="Product name is required"
+                    />
+                
                     <Label text="Price"/>
-                    <Input />
-                    
+                    <Input 
+                        id="ProductPrice"
+                        placeholder="{i18n>placeholderSearchInput}"
+                        value="{ProductSelected>/newUnitPrice}"
+                        required="true"
+                        valueState="{= ${ProductSelected>/newUnitPrice} ? 'None' : 'Error' }"
+                        valueStateText="Price is required"
+                    />
                 </f:content>
             </f:SimpleForm>
         </content>
         <buttons>
             <Button text="Create" press="createSupplierProduct"/>
+            <Button text="Cancel" press="closeCreateSupplierDialog"/>
         </buttons>
     </Dialog>
     

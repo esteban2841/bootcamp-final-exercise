@@ -12,22 +12,28 @@ sap.ui.define([
         setDefaultModelStore: async function (oComponent){
             const oFilters = []
             const suppliers = await HomeService.read_oData_entity(this._oNorthwindModel, oFilters, '/Suppliers')
+            const products = await HomeService.read_oData_entity(this._oNorthwindModel, oFilters, '/Products')
             oComponent.setModel(new JSONModel({
                 suppliers: suppliers[0].results,
+                products: products[0].results,
+                filteredProductsByProvider: [],
                 valueInputByIdSearch: "",
                 valueInputByNameSearch: "",
-                supplierForm: {
-                    ProductName: "",
-                    ProductID: "",
-                    UnitPrice: 0,
-                    
-                },
+                newProductName: "",
+                newProductID: "",
+                newUnitPrice: 0,
             }), "SuppliersDataStore")
 
             const data = oComponent.getModel('SuppliersDataStore').getData()
             console.log(data, 'se setea bien la data')
             return data
             
+        },
+
+        filterSupplierProducts: async function (oFilters){
+            console.log(oFilters, 'filtering supplier products')
+            const supplierProducts = await HomeService.read_oData_entity(this._oNorthwindModel, oFilters, '/Products')
+            return supplierProducts
         },
 
         getDataProducts: async function (oFilters){

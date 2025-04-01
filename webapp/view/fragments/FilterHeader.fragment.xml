@@ -38,5 +38,6 @@
             </l:VerticalLayout>
         </FlexBox>
             <Button id="idSearchButton" text="{i18n>buttonSearchText}" press=".onPress" width="auto" />
+            <Button id="resetFIlters" text="{i18n>resetFilters}" press=".resetFilters" width="auto" />
     </FlexBox>
 </c:FragmentDefinition>

@@ -45,6 +45,19 @@ sap.ui.define([
             
             await HomeHelper.setProductModel(this, CurrentState, "SuppliersDataStore");
         },
+		resetFilters: async function (){
+            
+            let oFilter = [];
+            // let sValue = this.byId("inputID").getValue();
+            // let sValueCombo = this.byId("comboboxID").getSelectedKey();
+            let oDatos = await HomeHelper.getDataProducts(oFilter);
+            
+            let CurrentState = this.getOwnerComponent().getModel('SuppliersDataStore').getData()
+            
+            CurrentState.suppliers = oDatos[0].results
+            
+            await HomeHelper.setProductModel(this, CurrentState, "SuppliersDataStore");
+        },
 
 		getViewSettingsDialog: function (sDialogFragmentName) {
             console.log(sDialogFragmentName, 'dialog name', this.getView().getId(), this)
