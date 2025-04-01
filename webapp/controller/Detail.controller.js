@@ -7,7 +7,8 @@ sap.ui.define([
     "sap/ui/model/FilterOperator",
     "sap/ui/model/Filter",
     "sap/m/MessageBox",
-], (BaseController, Fragment, Device, JSONModel, HomeHelper, FilterOperator, Filter, MessageBox) => {
+    "sap/m/MessageToast",
+], (BaseController, Fragment, Device, JSONModel, HomeHelper, FilterOperator, Filter, MessageBox, MessageToast) => {
     "use strict";
 
     return BaseController.extend("com.bootcamp.sapui5.finaltest.controller.Detail", {
@@ -29,7 +30,6 @@ sap.ui.define([
             let SuppliersDataStore = this.getOwnerComponent().getModel("SuppliersDataStore").getData();
             let oSelectedItem = SuppliersDataStore.filteredProductsByProvider[rowId]
             // Your dialog opening logic here
-            console.log(SuppliersDataStore, 'modelo a enviar al dialog')
             this.showProductDetailDialog(oSelectedItem, SuppliersDataStore.categories);
         },
 
@@ -60,9 +60,6 @@ sap.ui.define([
         },
 
         getVisualizationDialog: function (sDialogFragmentName, itemSelected, categories = []) {
-
-
-            console.log(categories, 'antes de setear el modelo')
             let pDialog = this._mViewSettingsDialogs[sDialogFragmentName]
 
             if (!pDialog) {
@@ -149,7 +146,7 @@ sap.ui.define([
 
             const isFormValid = this.handleCreationFormValidation()
 
-            if(!isFormValid){
+            if (!isFormValid) {
                 return
             }
 
@@ -196,6 +193,31 @@ sap.ui.define([
 
             this.showAlertOnSuccess("Product created successfully")
 
+        },
+
+        deleteProductReassurance: async function (iIndex) {
+
+            let oModel = this.getOwnerComponent().getModel("SuppliersDataStore").getData();
+            // get rid of product by row index match
+            let oSelectedItem = [...oModel.filteredProductsByProvider].filter((prod, index) => index !== Number(iIndex))
+            let oBinding = this.getView().byId("SUPPLIER_PRODUCTS_TABLE").getBinding("items")
+
+            MessageBox.confirm("Are you sure you want to delete this product?", {
+                title: "Confirm Deletion",
+                actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
+                onClose: async function (sAction) {
+                    if (sAction === MessageBox.Action.OK) {
+                        oModel.filteredProductsByProvider = [...oSelectedItem]
+                        oBinding.getModel().refresh();
+                        MessageToast.show("Product deleted");
+                    }
+                }
+            });
+        },
+
+        async delete(oEvent) {
+            let rowId = oEvent.getSource().sId.split("").pop()
+            this.deleteProductReassurance(rowId)
         },
 
         showAlertOnSuccess(message) {

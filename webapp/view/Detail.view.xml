@@ -35,8 +35,20 @@
                     <Label id="ld_04" text="{i18n>contactTitle}" />
                     <Text id="countryText" text="{ContactTitle}" />
 
+                    <Label text="{i18n>address}" />
+                    <Text text="{Address}" />
+
+                    <Label text="{i18n>Country}" />
+                    <Text text="{Country}" />
+
                     <Label text="{i18n>city}" />
                     <Text text="{City}" />
+
+                    <Label text="{i18n>Region}" />
+                    <Text text="{Region}" />
+
+                    <Label text="{i18n>Phone}" />
+                    <Text text="{Phone}" />
                 </f:content>
             </f:SimpleForm>
             <layout:VerticalLayout >          
@@ -77,6 +89,9 @@
                         </Column>
                         <Column  hAlign="Center" width="100px">
                             <Text text="{i18n>moreInfo}" />
+                        </Column>
+                        <Column  hAlign="Center" width="100px">
+                            <Text text="{i18n>delete}" />
                         </Column>
                     </columns>
                     <items>
@@ -131,6 +146,17 @@
                                     <Button
                                         icon="sap-icon://display"
                                         press="onShowDetailsCreation"
+                                    />
+                                </FlexBox>
+                                <FlexBox 
+                                    width="100%"
+                                    alignContent="Center"
+                                    justifyContent="Center"
+                                >
+                                
+                                    <Button
+                                        icon="sap-icon://delete"
+                                        press="delete"
                                     />
                                 </FlexBox>
                             </cells>
