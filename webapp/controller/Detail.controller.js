@@ -195,11 +195,11 @@ sap.ui.define([
 
         },
 
-        deleteProductReassurance: async function (iIndex) {
+        deleteProductReassurance: async function (rowIndex) {
 
             let oModel = this.getOwnerComponent().getModel("SuppliersDataStore").getData();
             // get rid of product by row index match
-            let oSelectedItem = [...oModel.filteredProductsByProvider].filter((prod, index) => index !== Number(iIndex))
+            let oSelectedItem = [...oModel.filteredProductsByProvider].filter((prod, index) => index !== Number(rowIndex))
             let oBinding = this.getView().byId("SUPPLIER_PRODUCTS_TABLE").getBinding("items")
 
             MessageBox.confirm("Are you sure you want to delete this product?", {
