@@ -150,7 +150,7 @@ sap.ui.define([
 
             let oTable = this.byId("SUPPLIER_PRODUCTS_TABLE");
 
-            // Obtener los datos del modelo
+            // Obtain Model data
             let oModel = this.getOwnerComponent().getModel("SuppliersDataStore");
             let SuppliersDataStore = this.getOwnerComponent().getModel("SuppliersDataStore").getData();
             let aProducts = oModel.getProperty("/filteredProductsByProvider");
@@ -158,12 +158,12 @@ sap.ui.define([
             aProducts.push(this.creationForm)
 
 
-            // Crear un modelo JSON temporal para la tabla
+            // Create a JSON model inside the binding
             let oTableModel = new JSONModel(
                 SuppliersDataStore
             );
 
-            // Vincular los datos a la tabla
+            // Bind data into the table
             oTable.setModel(oTableModel);
 
             oTable.bindAggregation("items", {
@@ -247,7 +247,7 @@ sap.ui.define([
 
 
         _onObjectMatched: async function (oEvent) {
-            // Obtener el ProductID de la URL y enlazar el contexto
+            // Obtain supplierID and link it into the table by binding it
             let sSupplierID = oEvent.getParameter("arguments").SupplierID;
 
             const oFilter = []
