@@ -51,7 +51,7 @@ sap.ui.define([
         },
 
 		getViewSettingsDialog: function (sDialogFragmentName) {
-			var pDialog = this._mViewSettingsDialogs[sDialogFragmentName];
+			let pDialog = this._mViewSettingsDialogs[sDialogFragmentName];
 
 			if (!pDialog) {
 				pDialog = Fragment.load({

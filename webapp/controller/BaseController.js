@@ -12,7 +12,7 @@ sap.ui.define([
 		},
 
 		onNavBack: function () {
-			var oHistory, sPreviousHash;
+			let oHistory, sPreviousHash;
 
 			oHistory = History.getInstance();
 			sPreviousHash = oHistory.getPreviousHash();
