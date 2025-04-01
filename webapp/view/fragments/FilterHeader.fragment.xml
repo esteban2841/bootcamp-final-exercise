@@ -8,7 +8,7 @@
         gap="15px"
         direction="Row"
         alignItems="Center"
-        justifyContent="Center"
+        justifyContent="Start"
         width="100%" 
         class="sapUiResponsiveContentPadding"
     >
@@ -20,22 +20,14 @@
         >
             <l:VerticalLayout >
             
-                <Label text="{i18n>placeholderSearchInput}"/>
                 <Input id="idSearchByIdInput"
+                width="220px"
                     placeholder="{i18n>placeholderSearchInput}"
-                    value="{SuppliersDataStore>/valueInputByIdSearch}">
+                    value="{SuppliersDataStore>/valueInputSearch}">
 
                 </Input>
             </l:VerticalLayout>
-            <l:VerticalLayout >
-            
-                <Label text="{i18n>placeholderSearchInput}"/>
-                <Input id="idSearchByNameInput"
-                    placeholder="{i18n>placeholderSearchInput}"
-                    value="{SuppliersDataStore>/valueInputByNameSearch}">
 
-                </Input>
-            </l:VerticalLayout>
         </FlexBox>
             <Button id="idSearchButton" text="{i18n>buttonSearchText}" press=".onPress" width="auto" />
             <Button id="resetFIlters" text="{i18n>resetFilters}" press=".resetFilters" width="auto" />

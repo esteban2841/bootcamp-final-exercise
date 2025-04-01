@@ -6,21 +6,25 @@ sap.ui.define([
     "com/bootcamp/sapui5/finaltest/utils/HomeHelper",
     "sap/ui/model/FilterOperator",
     "sap/ui/model/Filter",
-        "sap/m/MessageBox"
+    "sap/m/MessageBox",
 ], (BaseController, Fragment, Device, JSONModel, HomeHelper, FilterOperator, Filter, MessageBox) => {
     "use strict";
 
     return BaseController.extend("com.bootcamp.sapui5.finaltest.controller.Detail", {
         onInit: function () {
+
+            // getting router ref for this view
             let oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-            oRouter.getRoute("detail").attachPatternMatched(this._onObjectMatched, this);
+            //setting initial variables
             this._mViewSettingsDialogs = {};
-            const models = this.getOwnerComponent().getModel("SuppliersDataStore").getData()
-            console.log(models, 'data que llega al iniciar Detalle')
             this.creationForm = {}
+
+            //getting the route params to render the supplier detail inside the view
+            oRouter.getRoute("detail").attachPatternMatched(this._onObjectMatched, this);
         },
 
         onShowDetailsCreation: function (oEvent) {
+            //getting row reference on to set the model inside the dialog state
             let rowId = oEvent.getSource().sId.split("").pop()
             let SuppliersDataStore = this.getOwnerComponent().getModel("SuppliersDataStore").getData();
             let oSelectedItem = SuppliersDataStore.filteredProductsByProvider[rowId]
@@ -50,7 +54,7 @@ sap.ui.define([
             model.categories = data[0].results
 
             this.creationForm.CategoryID = sValueCombo
-            
+
             await HomeHelper.setProductModel(this, model, "SuppliersDataStore");
 
         },
@@ -77,14 +81,11 @@ sap.ui.define([
                     }
                     return oDialog;
                 });
-                const MultiCombo = this.byId("MT_CATEGORIES_SELECT")
-                console.log(MultiCombo, 'iMultiCombo')
                 this._mViewSettingsDialogs[sDialogFragmentName] = pDialog;
             }
 
             pDialog.then(function (oDialog) {
                 //overwriting the Dialog product detail model inside the dialog View in order to change the product detail ref
-                console.log(itemSelected, oDialog, 'item inside fragment')
                 oDialog.setModel(new JSONModel({
                     ...itemSelected,
                     categories
@@ -94,8 +95,6 @@ sap.ui.define([
                 }
                 return oDialog;
             });
-            const MultiCombo = this.byId("MT_CATEGORIES_SELECT")
-            console.log(MultiCombo, 'iMultiCombo')
 
             return pDialog;
         },
@@ -108,18 +107,10 @@ sap.ui.define([
                 });
         },
 
-        createSupplierProduct(oEvent) {
+        handleCreationFormValidation: function () {
             let oView = this.getView();
-            let oFilter = []
-
 
             let bIsValid = true;
-
-            this.creationForm.ProductID = this.byId("ProductId").getValue()
-            this.creationForm.ProductName = this.byId("ProductName").getValue()
-            this.creationForm.ProductPrice = this.byId("ProductPrice").getValue()
-
-            console.log(this.creationForm.CategoryID, 'valor multiinput')
             if (!this.creationForm.CategoryID) {
                 oView.byId("CategoryId").setValueState("Error");
                 bIsValid = false;
@@ -143,7 +134,23 @@ sap.ui.define([
 
             if (!bIsValid) {
                 sap.m.MessageToast.show("Please fill all required fields");
-                return;
+                return bIsValid;
+            }
+
+            return bIsValid
+        },
+
+        createSupplierProduct() {
+            let oFilter = []
+
+            this.creationForm.ProductID = this.byId("ProductId").getValue()
+            this.creationForm.ProductName = this.byId("ProductName").getValue()
+            this.creationForm.ProductPrice = this.byId("ProductPrice").getValue()
+
+            const isFormValid = this.handleCreationFormValidation()
+
+            if(!isFormValid){
+                return
             }
 
             let oTable = this.byId("SUPPLIER_PRODUCTS_TABLE");
@@ -185,31 +192,24 @@ sap.ui.define([
 
             oTable.getModel().refresh()
 
-            const models = this.getOwnerComponent().getModel("SuppliersDataStore").getData()
-
             this.closeCreateSupplierDialog()
 
-
-            MessageBox.success("Product created successfully", {
-                title: "Success",                                    
-                onClose: null,                                       
-                styleClass: "",                                      
-                actions: sap.m.MessageBox.Action.OK,                 
-                emphasizedAction: sap.m.MessageBox.Action.OK,        
-                initialFocus: null,                                  
-                textDirection: sap.ui.core.TextDirection.Inherit,    
-                dependentOn: null                                    
-            });
-
-            console.log(models, form, ' acac los modelos para crear con inputs form')
+            this.showAlertOnSuccess("Product created successfully")
 
         },
 
-        filterSupplier: async function (oFilter, data) {
+        showAlertOnSuccess(message) {
 
-            const oData = await HomeHelper.getDataProducts(oFilter)
-
-            console.log(oData, 'filtro de supplier')
+            MessageBox.success(message, {
+                title: "Success",
+                onClose: null,
+                styleClass: "",
+                actions: sap.m.MessageBox.Action.OK,
+                emphasizedAction: sap.m.MessageBox.Action.OK,
+                initialFocus: null,
+                textDirection: sap.ui.core.TextDirection.Inherit,
+                dependentOn: null
+            });
         },
 
         showCreateProductDialog: function () {
@@ -243,9 +243,11 @@ sap.ui.define([
                 }
             });
 
-            let products = this.getView().byId("SUPPLIER_PRODUCTS_TABLE").getBinding("items")
+            //refresh table items binding due to filtered products by provider to have a ref to modified afterwards
 
-            products.getModel().refresh();
+            let oBinding = this.getView().byId("SUPPLIER_PRODUCTS_TABLE").getBinding("items")
+
+            oBinding.getModel().refresh();
 
         },
     });

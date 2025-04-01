@@ -11,41 +11,36 @@ sap.ui.define([
 
     return BaseController.extend("com.bootcamp.sapui5.finaltest.controller.Home", {
         onInit() {
-            // const store = this.getOwnerComponent().getModel('ProductDataStore').getData()
-            const store = this.getOwnerComponent().getModel()
             this._mViewSettingsDialogs = {};
 			this.oRouter = this.getOwnerComponent().getRouter()
         },
 
 		onPress: async function (){
-            
+
             let oFilter = [];
-            // let sValue = this.byId("inputID").getValue();
-            // let sValueCombo = this.byId("comboboxID").getSelectedKey();
 
             let values = this.getOwnerComponent().getModel("SuppliersDataStore").getData()
-			
-            if (values.valueInputByIdSearch) {
-                oFilter.push(new Filter("SupplierID", FilterOperator.EQ, values.valueInputByIdSearch));
+
+			let isNumber = Number(values.valueInputSearch)
+
+            if (values.valueInputSearch && !Number.isNaN(isNumber)) {
+                oFilter.push(new Filter("SupplierID", FilterOperator.EQ, values.valueInputSearch));
             }
-			
-			if(values.valueInputByNameSearch){
-				oFilter.push(new Filter("CompanyName", FilterOperator.Contains, values.valueInputByNameSearch));
+
+			if(values.valueInputSearch && Number.isNaN(isNumber)){
+				oFilter.push(new Filter("CompanyName", FilterOperator.Contains, values.valueInputSearch));
 
 			}
             let oDatos = await HomeHelper.getDataProducts(oFilter);
-            
-            let CurrentState = this.getOwnerComponent().getModel('SuppliersDataStore').getData()
-            
-            CurrentState.suppliers = oDatos[0].results
-            
-            await HomeHelper.setProductModel(this, CurrentState, "SuppliersDataStore");
+
+            values.suppliers = oDatos[0].results
+
+            await HomeHelper.setProductModel(this, values, "SuppliersDataStore");
         },
+		
 		resetFilters: async function (){
             
             let oFilter = [];
-            // let sValue = this.byId("inputID").getValue();
-            // let sValueCombo = this.byId("comboboxID").getSelectedKey();
             let oDatos = await HomeHelper.getDataProducts(oFilter);
             
             let CurrentState = this.getOwnerComponent().getModel('SuppliersDataStore').getData()

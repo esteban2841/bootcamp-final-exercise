@@ -20,8 +20,7 @@ sap.ui.define([
                 products: products[0].results,
                 categories: categories[0].results,
                 filteredProductsByProvider: [],
-                valueInputByIdSearch: "",
-                valueInputByNameSearch: "",
+                valueInputSearch: "",
                 newProductName: "",
                 newProductID: "",
                 newUnitPrice: 0,
@@ -38,7 +37,7 @@ sap.ui.define([
             return supplierProducts
         },
 
-        getDataProducts: async function (oFilters, entity = '/Supplier'){
+        getDataProducts: async function (oFilters, entity = '/Suppliers'){
             // let oFilters = [];
             return await HomeService.read_oData_entity(this._oNorthwindModel, oFilters, entity)
         },

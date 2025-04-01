@@ -5,39 +5,38 @@
     xmlns:core="sap.ui.core"
     xmlns:l="sap.ui.layout"
 >
-     <Dialog id="create-product-dialog" title="Create a product">
+    <Dialog
+        id="create-product-dialog"
+        title="Create a product"
+    >
         <content>
-            <f:SimpleForm editable="true" layout="ResponsiveGridLayout">
-                <f:content>
-
-                <!-- <MultiComboBox
-                id="MT_CATEGORIES_SELECT"
-                    selectionChange="onSelectionChange"
-                    selectionFinish="onFinishChange"
-                    selectedKeys="{ProductSelected>/multiFilter}"
-                    items="{
-                        path: 'ProductSelected>/categories',
-                        sorter: { path: 'CategoryName' }
-                    }">
-                    <core:Item key="{ProductSelected>CategoryID}" text="{ProductSelected>CategoryID} {ProductSelected>CategoryName}" />                                     
-                </MultiComboBox>   
-                            Category -->
-            <Label text="Category" required="true" />
-            <Select
-            id="CategoryId"
-                selectedKey="{ProductSelected>/newCategoryID}"
-                valueState="{= ${ProductSelected>/newCategoryID} ? 'None' : 'Error' }"
-                items="{
-                    path: 'ProductSelected>/categories'
-                }"
-                forceSelection="true"
-                change=".onSelectionChange"
+            <f:SimpleForm
+                editable="true"
+                layout="ResponsiveGridLayout"
             >
-                <core:Item key="{ProductSelected>CategoryID}" text="{ProductSelected>CategoryName}" />
-            </Select>             
+                <f:content>
+                    <Label
+                        text="Category"
+                        required="true"
+                    />
+                    <Select
+                        id="CategoryId"
+                        selectedKey="{ProductSelected>/newCategoryID}"
+                        valueState="{= ${ProductSelected>/newCategoryID} ? 'None' : 'Error' }"
+                        items="{
+                            path: 'ProductSelected>/categories'
+                        }"
+                        forceSelection="true"
+                        change=".onSelectionChange"
+                    >
+                        <core:Item
+                            key="{ProductSelected>CategoryID}"
+                            text="{ProductSelected>CategoryName}"
+                        />
+                    </Select>
 
-                    <Label text="Product ID"/>
-                    <Input 
+                    <Label text="Product ID" />
+                    <Input
                         id="ProductId"
                         placeholder="{i18n>placeholderSearchInput}"
                         value="{ProductSelected>/newProductID}"
@@ -45,9 +44,9 @@
                         valueState="{= ${ProductSelected>/newProductID} ? 'None' : 'Error' }"
                         valueStateText="Product ID is required"
                     />
-                    
-                    <Label text="Name"/>
-                    <Input 
+
+                    <Label text="Name" />
+                    <Input
                         id="ProductName"
                         placeholder="{i18n>placeholderSearchInput}"
                         value="{ProductSelected>/newProductName}"
@@ -55,9 +54,9 @@
                         valueState="{= ${ProductSelected>/newProductName} ? 'None' : 'Error' }"
                         valueStateText="Product name is required"
                     />
-                
-                    <Label text="Price"/>
-                    <Input 
+
+                    <Label text="Price" />
+                    <Input
                         id="ProductPrice"
                         placeholder="{i18n>placeholderSearchInput}"
                         value="{ProductSelected>/newUnitPrice}"
@@ -69,9 +68,14 @@
             </f:SimpleForm>
         </content>
         <buttons>
-            <Button text="Create" press="createSupplierProduct"/>
-            <Button text="Cancel" press="closeCreateSupplierDialog"/>
+            <Button
+                text="Create"
+                press="createSupplierProduct"
+            />
+            <Button
+                text="Cancel"
+                press="closeCreateSupplierDialog"
+            />
         </buttons>
     </Dialog>
-    
 </c:FragmentDefinition>
