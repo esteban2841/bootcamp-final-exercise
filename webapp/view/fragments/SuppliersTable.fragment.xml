@@ -13,6 +13,7 @@
 				<OverflowToolbar>
 					<Title text="{i18n>tableHeaderTitle}" level="H2"/>
 					<ToolbarSpacer/>
+                    <Text text="{i18n>sort}" />
 					<Button
 						tooltip="Sort"
 						icon="sap-icon://sort"

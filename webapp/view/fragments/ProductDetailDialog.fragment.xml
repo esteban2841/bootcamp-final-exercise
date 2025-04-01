@@ -19,6 +19,13 @@
                     
                     <Label text="Quantity per unit"/>
                     <Text text="{ProductSelected>/QuantityPerUnit}"/>
+
+                    <Label text="Units in stock"/>
+                    <Text text="{ProductSelected>/UnitsInStock}"/>
+
+                    <Label text="Discontinued"/>
+                    <Text text="{= ${ProductSelected>/Discontinued} ? 'yes' : 'no' }"/>
+
                     
                 </f:content>
             </f:SimpleForm>

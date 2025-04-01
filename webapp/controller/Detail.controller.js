@@ -68,7 +68,6 @@ sap.ui.define([
                     name: sDialogFragmentName,
                     controller: this
                 }).then(function (oDialog) {
-                    console.log(itemSelected, oDialog, 'item inside fragment1')
                     oDialog.setModel(new JSONModel({
                         ...itemSelected,
                         categories
@@ -97,7 +96,6 @@ sap.ui.define([
         },
 
         showProductDetailDialog: function (oSelectedItem, categories) {
-            console.log(categories, 'showProductDetailDialog')
             this.getVisualizationDialog("com.bootcamp.sapui5.finaltest.view.fragments.ProductDetailDialog", oSelectedItem, categories)
                 .then(function (oViewSettingsDialog) {
                     oViewSettingsDialog.open();

@@ -3,13 +3,14 @@
     xmlns:c="sap.ui.core"
     xmlns:l="sap.ui.layout"
 >
-    <FlexBox id="idSearchContainer"
+    <FlexBox
+        id="idSearchContainer"
         backgroundDesign="Solid"
         gap="15px"
         direction="Row"
         alignItems="Center"
         justifyContent="Start"
-        width="100%" 
+        width="100%"
         class="sapUiResponsiveContentPadding"
     >
         <FlexBox
@@ -18,18 +19,26 @@
             alignItems="Center"
             justifyContent="SpaceBetween"
         >
-            <l:VerticalLayout >
-            
-                <Input id="idSearchByIdInput"
-                width="220px"
+            <l:VerticalLayout>
+                <Input
+                    id="idSearchByIdInput"
+                    width="220px"
                     placeholder="{i18n>placeholderSearchInput}"
-                    value="{SuppliersDataStore>/valueInputSearch}">
-
-                </Input>
+                    value="{SuppliersDataStore>/valueInputSearch}"
+                />
             </l:VerticalLayout>
-
         </FlexBox>
-            <Button id="idSearchButton" text="{i18n>buttonSearchText}" press=".onPress" width="auto" />
-            <Button id="resetFIlters" text="{i18n>resetFilters}" press=".resetFilters" width="auto" />
+        <Button
+            id="idSearchButton"
+            text="{i18n>buttonSearchText}"
+            press=".onPress"
+            width="auto"
+        />
+        <Button
+            id="resetFIlters"
+            text="{i18n>resetFilters}"
+            press=".resetFilters"
+            width="auto"
+        />
     </FlexBox>
 </c:FragmentDefinition>
