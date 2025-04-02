@@ -43,6 +43,8 @@ sap.ui.define([
                 {fieldName: 'ProductID', value: oView.byId("ProductID").getValue()},
                 {fieldName: 'ProductName', value: oView.byId("ProductName").getValue()},
                 {fieldName: 'UnitPrice', value: oView.byId("UnitPrice").getValue()},
+                {fieldName: 'QuantityPerUnit', value: oView.byId("QuantityPerUnit").getValue()},
+                {fieldName: 'UnitsInStock', value: oView.byId("UnitsInStock").getValue()},
             ] 
             
             const newProduct = {}
@@ -50,7 +52,6 @@ sap.ui.define([
             let isProductValid = true;
 
             form.forEach(field=>{
-                console.log(field.fieldName)
                 if (!field.value) {
                     //in case no value was passed set ui red color
                     // to the input and display and alert to notify the user

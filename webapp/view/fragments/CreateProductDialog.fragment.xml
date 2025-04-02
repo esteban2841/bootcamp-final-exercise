@@ -63,6 +63,24 @@
                         valueState="{= ${ProductSelected>/newUnitPrice} ? 'None' : 'Error' }"
                         valueStateText="Price is required"
                     />
+                    <Label text="Quantity per unit" />
+                    <Input
+                        id="QuantityPerUnit"
+                        placeholder="{i18n>placeholderSearchInput}"
+                        value="{ProductSelected>/QuantityPerUnit}"
+                        required="true"
+                        valueState="{= ${ProductSelected>/QuantityPerUnit} ? 'None' : 'Error' }"
+                        valueStateText="Quantity per unit is required"
+                    />
+                    <Label text="Stock Units" />
+                    <Input
+                        id="UnitsInStock"
+                        placeholder="{i18n>placeholderSearchInput}"
+                        value="{ProductSelected>/UnitsInStock}"
+                        required="true"
+                        valueState="{= ${ProductSelected>/UnitsInStock} ? 'None' : 'Error' }"
+                        valueStateText="Stock is required"
+                    />
                 </f:content>
             </f:SimpleForm>
         </content>
