@@ -20,14 +20,13 @@
                         required="true"
                     />
                     <Select
-                        id="CategoryId"
+                        id="CategoryID"
                         selectedKey="{ProductSelected>/newCategoryID}"
                         valueState="{= ${ProductSelected>/newCategoryID} ? 'None' : 'Error' }"
                         items="{
                             path: 'ProductSelected>/categories'
                         }"
                         forceSelection="true"
-                        change=".onSelectionChange"
                     >
                         <core:Item
                             key="{ProductSelected>CategoryID}"
@@ -37,7 +36,7 @@
 
                     <Label text="Product ID" />
                     <Input
-                        id="ProductId"
+                        id="ProductID"
                         placeholder="{i18n>placeholderSearchInput}"
                         value="{ProductSelected>/newProductID}"
                         required="true"
@@ -57,7 +56,7 @@
 
                     <Label text="Price" />
                     <Input
-                        id="ProductPrice"
+                        id="UnitPrice"
                         placeholder="{i18n>placeholderSearchInput}"
                         value="{ProductSelected>/newUnitPrice}"
                         required="true"

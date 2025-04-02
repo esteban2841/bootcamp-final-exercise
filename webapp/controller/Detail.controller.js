@@ -18,7 +18,6 @@ sap.ui.define([
             let oRouter = sap.ui.core.UIComponent.getRouterFor(this);
             //setting initial variables
             this._mViewSettingsDialogs = {};
-            this.creationForm = {}
 
             //getting the route params to render the supplier detail inside the view
             oRouter.getRoute("detail").attachPatternMatched(this._onObjectMatched, this);
@@ -46,11 +45,11 @@ sap.ui.define([
                 });
         },
 
-        onSelectionChange: async function (oEvent) {
-            let sValueCombo = oEvent.getSource().getSelectedKey()
-            this.creationForm.CategoryID = sValueCombo
+        // onSelectionChange: async function (oEvent) {
+        //     let sValueCombo = oEvent.getSource().getSelectedKey()
+        //     this.creationForm.CategoryID = sValueCombo
 
-        },
+        // },
 
         getVisualizationDialog: function (sDialogFragmentName, itemSelected, categories = []) {
             let pDialog = this._mViewSettingsDialogs[sDialogFragmentName]
@@ -95,49 +94,12 @@ sap.ui.define([
                 });
         },
 
-        handleCreationFormValidation: function () {
-            let oView = this.getView();
-
-            let isProductValid = true;
-            if (!this.creationForm.CategoryID) {
-                oView.byId("CategoryId").setValueState("Error");
-                isProductValid = false;
-            }
-
-            if (!this.creationForm.ProductID) {
-                oView.byId("ProductId").setValueState("Error");
-                isProductValid = false;
-            }
-
-            if (!this.creationForm.ProductName) {
-                oView.byId("ProductName").setValueState("Error");
-                isProductValid = false;
-            }
-
-            if (!this.creationForm.UnitPrice) {
-                oView.byId("ProductPrice").setValueState("Error");
-                isProductValid = false;
-            }
-
-
-            if (!isProductValid) {
-                sap.m.MessageToast.show("Please fill all required fields");
-                return isProductValid;
-            }
-
-            return isProductValid
-        },
-
         createSupplierProduct() {
             let oFilter = []
 
-            this.creationForm.ProductID = this.byId("ProductId").getValue()
-            this.creationForm.ProductName = this.byId("ProductName").getValue()
-            this.creationForm.UnitPrice = this.byId("ProductPrice").getValue().concat('.0000')
+            const {isProductValid, newProduct} = HomeHelper.handleCreationFormValidation(this.getView())
 
-            const isFormValid = this.handleCreationFormValidation()
-
-            if (!isFormValid) {
+            if (!isProductValid) {
                 return
             }
 
@@ -148,9 +110,7 @@ sap.ui.define([
             let SuppliersDataStore = this.getOwnerComponent().getModel("SuppliersDataStore").getData();
             let aProducts = oModel.getProperty("/filteredProductsByProvider");
 
-
-            console.log(aProducts, 'products')
-            aProducts.push(this.creationForm)
+            aProducts.push(newProduct)
 
 
             // Create a JSON model inside the binding

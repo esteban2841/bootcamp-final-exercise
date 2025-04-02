@@ -33,6 +33,39 @@ sap.ui.define([
             
         },
 
+        handleCreationFormValidation: function (view) {
+            let oView = view;
+
+            const form = [
+                {fieldName: 'CategoryID', value: oView.byId("CategoryID").getSelectedKey()},
+                {fieldName: 'ProductID', value: oView.byId("ProductID").getValue()},
+                {fieldName: 'ProductName', value: oView.byId("ProductName").getValue()},
+                {fieldName: 'UnitPrice', value: oView.byId("UnitPrice").getValue()},
+            ] 
+            
+            const newProduct = {}
+
+            let isProductValid = true;
+
+            form.forEach(field=>{
+                console.log(field.fieldName)
+                if (!field.value) {
+                    oView.byId(field.fieldName).setValueState("Error");
+                    isProductValid = false;
+                }else{
+                    newProduct[field.fieldName] = field.value
+                }
+                
+
+            })
+            if (!isProductValid) {
+                sap.m.MessageToast.show("Please fill all required fields");
+                return {isProductValid, newProduct};
+            }
+
+            return {isProductValid, newProduct}
+        },
+
         showAlertOnSuccess(message) {
 
             MessageBox.success(message, {
