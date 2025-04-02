@@ -35,7 +35,13 @@ sap.ui.define([
 
         handleCreationFormValidation: function (view) {
             let oView = view;
+
+            //getting locale variables for the instanced language
             
+            let oBundle = oView.getModel("i18n").getResourceBundle();
+            let errorAlertText = oBundle.getText("errorFormAlert");
+            let errorMessageText = oBundle.getText("errorFormMessage");
+            console.log(errorAlertText, ' locale text')
             //getting user given product fields 
 
             const form = [
@@ -57,7 +63,7 @@ sap.ui.define([
                     // to the input and display and alert to notify the user
                     oView.byId(field.fieldName).setValueState("Error");
                     isProductValid = false;
-                    this.showAlert(`Please fill the following fields: ${field.fieldName}`, 'error', 'Error')
+                    this.showAlert(`${errorAlertText} ${field.fieldName}`, 'error', 'Error')
                 }else{
                     newProduct[field.fieldName] = field.value
                 }
@@ -65,7 +71,7 @@ sap.ui.define([
 
             })
             if (!isProductValid) {
-                sap.m.MessageToast.show("Please fill all required fields");
+                sap.m.MessageToast.show(errorMessageText);
                 return {isProductValid, newProduct};
             }
 

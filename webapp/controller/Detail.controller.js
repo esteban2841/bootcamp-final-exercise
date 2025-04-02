@@ -45,12 +45,6 @@ sap.ui.define([
                 });
         },
 
-        // onSelectionChange: async function (oEvent) {
-        //     let sValueCombo = oEvent.getSource().getSelectedKey()
-        //     this.creationForm.CategoryID = sValueCombo
-
-        // },
-
         getVisualizationDialog: function (sDialogFragmentName, itemSelected, categories = []) {
             let pDialog = this._mViewSettingsDialogs[sDialogFragmentName]
 
@@ -95,6 +89,8 @@ sap.ui.define([
         },
 
         createSupplierProduct() {
+            let oBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+            let productSuccessText = oBundle.getText("productSuccessText");
             let oFilter = []
 
             const {isProductValid, newProduct} = HomeHelper.handleCreationFormValidation(this.getView())
@@ -149,7 +145,7 @@ sap.ui.define([
 
             this.closeCreateSupplierDialog()
 
-            HomeHelper.showAlert("Product created successfully")
+            HomeHelper.showAlert(productSuccessText)
 
         },
 

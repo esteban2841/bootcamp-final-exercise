@@ -19,23 +19,23 @@ sap.ui.define([
 
             let oFilter = [];
 
-            let values = this.getOwnerComponent().getModel("SuppliersDataStore").getData()
+            let model = this.getOwnerComponent().getModel("SuppliersDataStore").getData()
 
-			let isNumber = Number(values.valueInputSearch)
+			let isNumber = Number(model.valueInputSearch)
 
-            if (values.valueInputSearch && !Number.isNaN(isNumber)) {
-                oFilter.push(new Filter("SupplierID", FilterOperator.EQ, values.valueInputSearch));
+            if (model.valueInputSearch && !Number.isNaN(isNumber)) {
+                oFilter.push(new Filter("SupplierID", FilterOperator.EQ, model.valueInputSearch));
             }
 
-			if(values.valueInputSearch && Number.isNaN(isNumber)){
-				oFilter.push(new Filter("CompanyName", FilterOperator.Contains, values.valueInputSearch));
+			if(model.valueInputSearch && Number.isNaN(isNumber)){
+				oFilter.push(new Filter("CompanyName", FilterOperator.Contains, model.valueInputSearch));
 
 			}
             let oDatos = await HomeHelper.getDataProducts(oFilter);
 
-            values.suppliers = oDatos[0].results
+            model.suppliers = oDatos[0].results
 
-            await HomeHelper.setProductModel(this, values, "SuppliersDataStore");
+            await HomeHelper.setProductModel(this, model, "SuppliersDataStore");
         },
 		
 		resetFilters: async function (){
