@@ -92,31 +92,31 @@ sap.ui.define([
             let oBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
             let productSuccessText = oBundle.getText("productSuccessText");
             let oFilter = []
-
+            
             const {isProductValid, newProduct} = HomeHelper.handleCreationFormValidation(this.getView())
-
+            
             if (!isProductValid) {
                 return
             }
-
+            
             let oTable = this.byId("SUPPLIER_PRODUCTS_TABLE");
-
+            
             // Obtain Model data
             let oModel = this.getOwnerComponent().getModel("SuppliersDataStore");
             let SuppliersDataStore = this.getOwnerComponent().getModel("SuppliersDataStore").getData();
             let aProducts = oModel.getProperty("/filteredProductsByProvider");
-
+            
             aProducts.push(newProduct)
-
-
+            
+            
             // Create a JSON model inside the binding
             let oTableModel = new JSONModel(
                 SuppliersDataStore
             );
-
+            
             // Bind data into the table
             oTable.setModel(oTableModel);
-
+            
             oTable.bindAggregation("items", {
                 path: "SuppliersDataStore>/filteredProductsByProvider",
                 template: new sap.m.ColumnListItem({
@@ -140,17 +140,19 @@ sap.ui.define([
                     ]
                 })
             });
-
+            
             oTable.getModel().refresh()
-
+            
             this.closeCreateSupplierDialog()
-
+            
             HomeHelper.showAlert(productSuccessText)
-
+            
         },
-
+        
         deleteProductReassurance: async function (rowIndex) {
-
+            let oBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+            let productSuccessDelete = oBundle.getText("deleted");
+            
             let oModel = this.getOwnerComponent().getModel("SuppliersDataStore").getData();
             // get rid of product by row index match
             let oSelectedItem = [...oModel.filteredProductsByProvider].filter((prod, index) => index !== Number(rowIndex))
@@ -163,7 +165,7 @@ sap.ui.define([
                     if (sAction === MessageBox.Action.OK) {
                         oModel.filteredProductsByProvider = [...oSelectedItem]
                         oBinding.getModel().refresh();
-                        MessageToast.show("Product deleted");
+                        MessageToast.show(productSuccessDelete);
                     }
                 }
             });
