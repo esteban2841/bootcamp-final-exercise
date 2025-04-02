@@ -1,7 +1,8 @@
 sap.ui.define([
     "com/bootcamp/sapui5/finaltest/utils/HomeService",
     "sap/ui/model/json/JSONModel",
-], function (HomeService, JSONModel){
+    "sap/m/MessageBox",
+], function (HomeService, JSONModel, MessageBox){
     "use strict"
 
     return {
@@ -30,6 +31,20 @@ sap.ui.define([
             const data = oComponent.getModel('SuppliersDataStore').getData()
             return data
             
+        },
+
+        showAlertOnSuccess(message) {
+
+            MessageBox.success(message, {
+                title: "Success",
+                onClose: null,
+                styleClass: "",
+                actions: sap.m.MessageBox.Action.OK,
+                emphasizedAction: sap.m.MessageBox.Action.OK,
+                initialFocus: null,
+                textDirection: sap.ui.core.TextDirection.Inherit,
+                dependentOn: null
+            });
         },
 
         filterSupplierProducts: async function (oFilters){

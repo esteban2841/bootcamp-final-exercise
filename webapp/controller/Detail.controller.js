@@ -47,15 +47,8 @@ sap.ui.define([
         },
 
         onSelectionChange: async function (oEvent) {
-            const filters = []
-            const model = this.getOwnerComponent().getModel("SuppliersDataStore").getData()
             let sValueCombo = oEvent.getSource().getSelectedKey()
-            const data = await HomeHelper.getDataProducts(filters, '/Categories')
-            model.categories = data[0].results
-
             this.creationForm.CategoryID = sValueCombo
-
-            await HomeHelper.setProductModel(this, model, "SuppliersDataStore");
 
         },
 
@@ -105,34 +98,34 @@ sap.ui.define([
         handleCreationFormValidation: function () {
             let oView = this.getView();
 
-            let bIsValid = true;
+            let isProductValid = true;
             if (!this.creationForm.CategoryID) {
                 oView.byId("CategoryId").setValueState("Error");
-                bIsValid = false;
+                isProductValid = false;
             }
 
             if (!this.creationForm.ProductID) {
                 oView.byId("ProductId").setValueState("Error");
-                bIsValid = false;
+                isProductValid = false;
             }
 
             if (!this.creationForm.ProductName) {
                 oView.byId("ProductName").setValueState("Error");
-                bIsValid = false;
+                isProductValid = false;
             }
 
-            if (!this.creationForm.ProductPrice) {
+            if (!this.creationForm.UnitPrice) {
                 oView.byId("ProductPrice").setValueState("Error");
-                bIsValid = false;
+                isProductValid = false;
             }
 
 
-            if (!bIsValid) {
+            if (!isProductValid) {
                 sap.m.MessageToast.show("Please fill all required fields");
-                return bIsValid;
+                return isProductValid;
             }
 
-            return bIsValid
+            return isProductValid
         },
 
         createSupplierProduct() {
@@ -140,7 +133,7 @@ sap.ui.define([
 
             this.creationForm.ProductID = this.byId("ProductId").getValue()
             this.creationForm.ProductName = this.byId("ProductName").getValue()
-            this.creationForm.ProductPrice = this.byId("ProductPrice").getValue()
+            this.creationForm.UnitPrice = this.byId("ProductPrice").getValue().concat('.0000')
 
             const isFormValid = this.handleCreationFormValidation()
 
@@ -155,6 +148,8 @@ sap.ui.define([
             let SuppliersDataStore = this.getOwnerComponent().getModel("SuppliersDataStore").getData();
             let aProducts = oModel.getProperty("/filteredProductsByProvider");
 
+
+            console.log(aProducts, 'products')
             aProducts.push(this.creationForm)
 
 
@@ -194,7 +189,7 @@ sap.ui.define([
 
             this.closeCreateSupplierDialog()
 
-            this.showAlertOnSuccess("Product created successfully")
+            HomeHelper.showAlertOnSuccess("Product created successfully")
 
         },
 
@@ -221,20 +216,6 @@ sap.ui.define([
         async delete(oEvent) {
             let rowId = oEvent.getSource().sId.split("").pop()
             this.deleteProductReassurance(rowId)
-        },
-
-        showAlertOnSuccess(message) {
-
-            MessageBox.success(message, {
-                title: "Success",
-                onClose: null,
-                styleClass: "",
-                actions: sap.m.MessageBox.Action.OK,
-                emphasizedAction: sap.m.MessageBox.Action.OK,
-                initialFocus: null,
-                textDirection: sap.ui.core.TextDirection.Inherit,
-                dependentOn: null
-            });
         },
 
         showCreateProductDialog: function () {
