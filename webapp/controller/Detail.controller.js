@@ -149,7 +149,7 @@ sap.ui.define([
 
             this.closeCreateSupplierDialog()
 
-            HomeHelper.showAlertOnSuccess("Product created successfully")
+            HomeHelper.showAlert("Product created successfully")
 
         },
 

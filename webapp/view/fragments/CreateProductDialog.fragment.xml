@@ -44,7 +44,7 @@
                         valueStateText="Product ID is required"
                     />
 
-                    <Label text="Name" />
+                    <Label text="Product Name" />
                     <Input
                         id="ProductName"
                         placeholder="{i18n>placeholderSearchInput}"
@@ -54,7 +54,7 @@
                         valueStateText="Product name is required"
                     />
 
-                    <Label text="Price" />
+                    <Label text="Unit Price" />
                     <Input
                         id="UnitPrice"
                         placeholder="{i18n>placeholderSearchInput}"

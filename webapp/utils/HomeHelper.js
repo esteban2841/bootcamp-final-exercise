@@ -35,6 +35,8 @@ sap.ui.define([
 
         handleCreationFormValidation: function (view) {
             let oView = view;
+            
+            //getting user given product fields 
 
             const form = [
                 {fieldName: 'CategoryID', value: oView.byId("CategoryID").getSelectedKey()},
@@ -50,8 +52,11 @@ sap.ui.define([
             form.forEach(field=>{
                 console.log(field.fieldName)
                 if (!field.value) {
+                    //in case no value was passed set ui red color
+                    // to the input and display and alert to notify the user
                     oView.byId(field.fieldName).setValueState("Error");
                     isProductValid = false;
+                    this.showAlert(`Please fill the following fields: ${field.fieldName}`, 'error', 'Error')
                 }else{
                     newProduct[field.fieldName] = field.value
                 }
@@ -66,10 +71,10 @@ sap.ui.define([
             return {isProductValid, newProduct}
         },
 
-        showAlertOnSuccess(message) {
+        showAlert(message, type = 'success', title= 'Success') {
 
-            MessageBox.success(message, {
-                title: "Success",
+            MessageBox[type](message, {
+                title: title,
                 onClose: null,
                 styleClass: "",
                 actions: sap.m.MessageBox.Action.OK,
